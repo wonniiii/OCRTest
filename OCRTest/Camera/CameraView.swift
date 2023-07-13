@@ -72,23 +72,21 @@ struct CameraView: View {
         }
       }
       .foregroundColor(.white)
-    }
-    /// ImagePicker
-    .sheet(isPresented: $viewModel.imagePickerPresented, onDismiss: {
-      viewModel.OCRViewPresented.toggle()
-    }) {
-      ImagePicker(image: $viewModel.selectedImage, isPresented: $viewModel.imagePickerPresented)
-    }
-    /// OCRView
-    .sheet(isPresented: $viewModel.OCRViewPresented) {
-      if let image = viewModel.selectedImage {
-        OCRView(image: image)
+      /// ImagePicker
+      .sheet(isPresented: $viewModel.imagePickerPresented, onDismiss: {
+        viewModel.OCRViewPresented.toggle()
+      }) {
+        ImagePicker(image: $viewModel.selectedImage, isPresented: $viewModel.imagePickerPresented)
+      }
+      .sheet(isPresented: $viewModel.OCRViewPresented) {
+        if let image = viewModel.selectedImage {
+          OCRView(image: image)
+        }
       }
     }
+    
   }
 }
-
-
 
 struct CameraPreviewView: UIViewRepresentable {
   class VideoPreviewView: UIView {
